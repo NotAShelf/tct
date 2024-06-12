@@ -1,8 +1,8 @@
 # tct
 
-**tct** (**t** **p**arallel **t**imer) is a quick and minimal program (70 LoC!)
-that helps determine the "optimal" number of parallel TCP requests for your
-network connection.
+**tct** (**t** **p**arallel **t**imer) is a quick and minimal program (< 70
+LoC!) that helps determine the "optimal" number of parallel TCP requests for
+your network connection.
 
 It performs a series of tests (following your desired configuration) by
 incrementally increasing the number of parallel requests and measuring the time
@@ -13,9 +13,9 @@ requests does not significantly reduce the overall time taken.
 
 ## Motivation
 
-The [Nix Package Manager]() has an option called `http-connections` that, as per
-the wiki, sets the _"maximum number of parallel TCP connections used to fetch
-files from binary caches and by other downloads."_
+The [Nix Package Manager](https://github.com/NixOS/nix) has an option called
+`http-connections` that, as per the wiki, sets the _"maximum number of parallel
+TCP connections used to fetch files from binary caches and by other downloads."_
 
 I have found this option a little obscure, however, as the default value (`25`)
 has no solid motivation behind it. Is it optimal? I don't know. Can it be
