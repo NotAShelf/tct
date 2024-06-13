@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 	"os/signal"
@@ -11,6 +12,12 @@ import (
 	"syscall"
 	"time"
 )
+
+type HttpClient interface {
+	Get(url string) (*http.Response, error)
+}
+
+var httpClient HttpClient = &http.Client{}
 
 func main() {
 	urlPtr := flag.String("url", "http://example.com", "URL to fetch")
@@ -45,7 +52,7 @@ func main() {
 					return
 				default:
 					time.Sleep(delay)
-					makeRequest(url)
+					makeRequest(httpClient, url)
 				}
 			}()
 		}
@@ -60,11 +67,13 @@ func main() {
 	fmt.Printf("\nOptimal Number of Parallel TCP Requests: %d\n", optimal)
 }
 
-func makeRequest(url string) {
-	resp, err := http.Get(url)
+func makeRequest(client HttpClient, url string) {
+	resp, err := client.Get(url)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	defer resp.Body.Close()
+	body, _ := io.ReadAll(resp.Body)
+	_ = body
 }
