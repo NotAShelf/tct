@@ -1,6 +1,6 @@
 # tct
 
-**tct** (**t** **p**arallel **t**imer) is a quick and minimal program (< 70
+**tct** (**t**cp **c**onnection **t**imer) is a quick and minimal program (< 70
 LoC!) that helps determine the "optimal" number of parallel TCP requests for
 your network connection.
 
