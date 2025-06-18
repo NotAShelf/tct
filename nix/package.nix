@@ -5,7 +5,7 @@
   fs = lib.fileset;
   s = ../.;
 in
-  buildGoModule {
+  buildGoModule (finalAttrs: {
     pname = "tct";
     version = "0.1.0";
 
@@ -20,5 +20,9 @@ in
 
     vendorHash = "sha256-m5mBubfbXXqXKsygF5j7cHEY+bXhAMcXUts5KBKoLzM=";
 
-    ldflags = ["-s" "-w"];
-  }
+    ldflags = [
+      "-s"
+      "-w"
+      "-X main.version=${finalAttrs.version}"
+    ];
+  })
